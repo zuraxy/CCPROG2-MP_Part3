@@ -75,10 +75,10 @@ typedef char string[50]; //32 highest string length in data provided but for buf
 	c. Return type: This function returns an integer value which indicates how many rows of values were retrieved and scanned
 */
 int
-getDataSet(dataSetStruct territory[], fp_source)
+getDataSet(dataSetStruct territory[], FILE *fp_source)
 {
 	int rowsOfData = 0, currentRow = 0;
-	while (fscanf(stdin, " %s %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf", 
+	while (fscanf(fp_source, " %s %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf", 
 		territory[currentRow].name, 
 		&territory[currentRow].baseLE, &territory[currentRow].airPollution, &territory[currentRow].ambientPM, &territory[currentRow].ozone, 
 		&territory[currentRow].HAP, &territory[currentRow].environ, &territory[currentRow].occup, &territory[currentRow].unsafeWash, 
@@ -92,11 +92,11 @@ getDataSet(dataSetStruct territory[], fp_source)
 }
 
 void
-printDataSet(dataSetStruct territory[], int rowsOfData)
+printDataSet(dataSetStruct territory[], int rowsOfData, FILE *fp_dest)
 {
 	for (int currentRow = 0; currentRow < rowsOfData; currentRow++)
 	{
-		printf("\n\t%s \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf\n", territory[currentRow].name, territory[currentRow].baseLE, territory[currentRow].airPollution, territory[currentRow].ambientPM, territory[currentRow].ozone, territory[currentRow].HAP, territory[currentRow].environ, territory[currentRow].occup, territory[currentRow].unsafeWash, territory[currentRow].metabolic, territory[currentRow].dietary, territory[currentRow].plasma, territory[currentRow].tobacco, territory[currentRow].smoking, territory[currentRow].secondhandSmoke, territory[currentRow].unsafeSex);
+		fprintf(fp_dest, "\n\t%s \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf\n", territory[currentRow].name, territory[currentRow].baseLE, territory[currentRow].airPollution, territory[currentRow].ambientPM, territory[currentRow].ozone, territory[currentRow].HAP, territory[currentRow].environ, territory[currentRow].occup, territory[currentRow].unsafeWash, territory[currentRow].metabolic, territory[currentRow].dietary, territory[currentRow].plasma, territory[currentRow].tobacco, territory[currentRow].smoking, territory[currentRow].secondhandSmoke, territory[currentRow].unsafeSex);
 	}
 }
 
@@ -487,12 +487,17 @@ int
 main()
 {
 	//DECLARATIONS
+	FILE *fp_source, *fp_dest;
+	fp_source = fopen("SOGA_DATASET.txt","r");
+	fp_dest = fopen("OUTPUT_AQUINO_SILVA.txt","w");
+
 	dataSetStruct territory[MAX_ROWS];
 	string indexLabel = { ' ' };
-	int numOfTestCases = 3, rowsOfData = getDataSet(territory);
+	int numOfTestCases = 3, rowsOfData = getDataSet(territory, fp_source);
 	int i, j; //used in for loops
+
 	
-	printDataSet(territory, rowsOfData);
+	printDataSet(territory, rowsOfData, fp_source);
 
 	/***********************************************************************|Q-U-E-S-T-I-O-N|*************************************************************************
 	 ****************************************************************************|O-N-E|************************************************************************/
@@ -501,29 +506,29 @@ main()
 	max = Q1(territory, rowsOfData, &highestAverage);
 	indexSetter(indexLabel, max);
 	
-	printf("Q1: What is the highest average loss of life expectancy among all risk factors? Display the value and the name of the risk factor?\n");
-	printf("A1: %.2lf years (%s risk factor)\n\n", highestAverage, indexLabel);
+	fprintf(fp_dest, "Q1: What is the highest average loss of life expectancy among all risk factors? Display the value and the name of the risk factor?\n");
+	fprintf(fp_dest, "A1: %.2lf years (%s risk factor)\n\n", highestAverage, indexLabel);
 
 	/************************************************************************|Q-U-E-S-T-I-O-N|*************************************************************************
 	 *****************************************************************************|T-W-O|************************************************************************/
 	string Q2ParameterTerritory[3] = {"Gambia", "Samoa", "Australasia"};
 	int index;
 	
-	printf("Q2: What is the overall reduction in life expectancy in <parameter-territory> as a result of smoking-related risk factors (tobacco, smoking, and secondhand smoke)?\n");
+	fprintf(fp_dest, "Q2: What is the overall reduction in life expectancy in <parameter-territory> as a result of smoking-related risk factors (tobacco, smoking, and secondhand smoke)?\n");
 	for (int i = 0; i < numOfTestCases; i++)
 	{
 		index = territoryIndexFinder(territory, rowsOfData, Q2ParameterTerritory[i]);
-		printf("Case %d: <parameter-territory> = %s\n", i+1, Q2ParameterTerritory[i]);
+		fprintf(fp_dest, "Case %d: <parameter-territory> = %s\n", i+1, Q2ParameterTerritory[i]);
 		if (index == -1)
-			printf("\t\tInvalid input. Name of the territory is not included in the dataset.\n\n");
+			fprintf(fp_dest, "\t\tInvalid input. Name of the territory is not included in the dataset.\n\n");
 		else
-			printf("\t\t%.2lf years\n\n",Q2(territory, rowsOfData, index));
+			fprintf(fp_dest, "\t\t%.2lf years\n\n",Q2(territory, rowsOfData, index));
 	}
 
 	/*************************************************************************|Q-U-E-S-T-I-O-N|*************************************************************************
 	 ****************************************************************************|T-H-R-E-E|************************************************************************/
-	printf("Q3: Which territory has their life expectancy shortened the least due to occupational hazards?\n");
-	printf("A3: %s", territory[Q3(territory, rowsOfData)].name);
+	fprintf(fp_dest, "Q3: Which territory has their life expectancy shortened the least due to occupational hazards?\n");
+	fprintf(fp_dest, "A3: %s", territory[Q3(territory, rowsOfData)].name);
 
 
 
@@ -543,21 +548,21 @@ main()
 	int testQ4[3] = {-34, 3, 5};
 	int valid;
 	
-	printf("\n\nQ4. What are the <parameter-number> countries with the highest life expectancy and which risk factor affects them "
+	fprintf(fp_dest, "\n\nQ4. What are the <parameter-number> countries with the highest life expectancy and which risk factor affects them "
 		"the most respectively? Display in order the territory's name, their base line life expectancy, and the greatest risk "
 		"factor for lowering life expectancy, along with its value. [algorithm(s): selection sort, maximum]");
 	
 	for(i = 0; i < 3; i++) {
-		printf("\nTest case %d: ", (i + 1));
-		printf("<parameter_number> is %d\n", testQ4[i]);
+		fprintf(fp_dest, "\nTest case %d: ", (i + 1));
+		fprintf(fp_dest, "<parameter_number> is %d\n", testQ4[i]);
 		
 		valid = Q4(territory, terrList, maxRisk, maxRiskVal, rowsOfData, testQ4[i]);
 		
 		if(valid < 0)
-			printf("Invalid input. Please input a nonnegative integer.\n");
+			fprintf(fp_dest, "Invalid input. Please input a nonnegative integer.\n");
 		
 		else for(j = 0; j < testQ4[i]; j++) {
-			printf("%20s %10lf %10s %10lf\n", terrList[j].name, terrList[j].baseLE, maxRisk[j], maxRiskVal[j]);
+			fprintf(fp_dest, "%20s %10lf %10s %10lf\n", terrList[j].name, terrList[j].baseLE, maxRisk[j], maxRiskVal[j]);
 		}
 	}
 	 
@@ -572,27 +577,27 @@ main()
 	 ****************************************************************************|F-I-V-E|************************************************************************/
 	int ctrQ5;
 	
-	printf("\n\nQ5. How many of the 14 risk factors reduce the life expectancy of <parameter-territory> "
+	fprintf(fp_dest, "\n\nQ5. How many of the 14 risk factors reduce the life expectancy of <parameter-territory> "
 			"by at least <parameter-number> years? [algorithm(s): linear search or binary search, count]");
 	
 	string testTerrQ5[3] = {"Switzerland", "Pakistan", "United_States_Virgin_Islands"};
 	double testValsQ5[3] = {-1, 2, 4};
 	
 	for(i = 0; i < 3; i++) {
-		printf("\nTest case %d: ", (i + 1));
-		printf("<parameter-territory> is %s\n", testTerrQ5[i]);
-		printf("<parameter-number> is %lf\n", testValsQ5[i]);
+		fprintf(fp_dest, "\nTest case %d: ", (i + 1));
+		fprintf(fp_dest, "<parameter-territory> is %s\n", testTerrQ5[i]);
+		fprintf(fp_dest, "<parameter-number> is %lf\n", testValsQ5[i]);
 		
 		ctrQ5 = Q5(territory, testTerrQ5[i], rowsOfData, testValsQ5[i]);
 		
 		if(ctrQ5 == -1)
-			printf("Invalid input. Number of years should be a nonnegative integer.\n");
+			fprintf(fp_dest, "Invalid input. Number of years should be a nonnegative integer.\n");
 		
 		if(ctrQ5 == -2)
-			printf("Invalid input. Name of the territory is not included in the dataset.\n");
+			fprintf(fp_dest, "Invalid input. Name of the territory is not included in the dataset.\n");
 		
 		if(ctrQ5 >= 0)
-			printf("%d risk factors\n", ctrQ5);
+			fprintf(fp_dest, "%d risk factors\n", ctrQ5);
 	}
 
 

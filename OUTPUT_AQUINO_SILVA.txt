@@ -1,0 +1,45 @@
+Q1: What is the highest average loss of life expectancy among all risk factors? Display the value and the name of the risk factor?
+A1: 5.77 years (metabolic risk factor)
+
+Q2: What is the overall reduction in life expectancy in <parameter-territory> as a result of smoking-related risk factors (tobacco, smoking, and secondhand smoke)?
+Case 1: <parameter-territory> = Gambia
+		2.13 years
+
+Case 2: <parameter-territory> = Samoa
+		6.25 years
+
+Case 3: <parameter-territory> = Australasia
+		Invalid input. Name of the territory is not included in the dataset.
+
+Q3: Which territory has their life expectancy shortened the least due to occupational hazards?
+A3: Saint_Vincent_and_the_Grenadines
+
+Q4. What are the <parameter-number> countries with the highest life expectancy and which risk factor affects them the most respectively? Display in order the territory's name, their base line life expectancy, and the greatest risk factor for lowering life expectancy, along with its value. [algorithm(s): selection sort, maximum]
+Test case 1: <parameter_number> is -34
+Invalid input. Please input a nonnegative integer.
+
+Test case 2: <parameter_number> is 3
+           Singapore  84.565300  Metabolic   3.278715
+               Japan  84.557851  Metabolic   2.546600
+             Iceland  83.891722  Metabolic   3.936359
+
+Test case 3: <parameter_number> is 5
+           Singapore  84.565300  Metabolic   3.278715
+           Singapore  84.565300  Metabolic   3.278715
+               Japan  84.557851  Metabolic   2.546600
+             Iceland  83.891722  Metabolic   3.936359
+         Switzerland  83.863622  Metabolic   4.023586
+
+
+Q5. How many of the 14 risk factors reduce the life expectancy of <parameter-territory> by at least <parameter-number> years? [algorithm(s): linear search or binary search, count]
+Test case 1: <parameter-territory> is Switzerland
+<parameter-number> is -1.000000
+Invalid input. Number of years should be a nonnegative integer.
+
+Test case 2: <parameter-territory> is Pakistan
+<parameter-number> is 2.000000
+5 risk factors
+
+Test case 3: <parameter-territory> is United_States_Virgin_Islands
+<parameter-number> is 4.000000
+Invalid input. Name of the territory is not included in the dataset.

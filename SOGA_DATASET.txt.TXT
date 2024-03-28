@@ -1,0 +1,66 @@
+
+5 Questions and Answers
+
+General Direction: Replace the underlines with the appropriate entries.
+
+
+Encode your questions below.  Indicate as well the algorithm(s) to be used in answering each question.
+Questions with parameter(s) should have the parameter(s) encoded in angled brackets, for example, <parameter-name>. 
+
+Q1: What is the highest average loss of life expectancy among all risk factors? Display the value and the name of the risk factor. [algorithm(s): average, maximum]
+
+Q2: What is the overall reduction in life expectancy in <parameter-territory> as a result of smoking-related risk factors (tobacco, smoking, and secondhand smoke)? [algorithm(s): linear search or binary search, sum]
+
+Q3: Which territory has their life expectancy shortened the least due to occupational hazards? [algorithm(s): minimum]
+
+Q4: What are the <parameter-number> countries with the highest life expectancy and which risk factor affects them the most respectively? Display in order the territory’s name, their base line life expectancy, and the greatest risk factor for lowering life expectancy, along with its value. [algorithm(s): selection sort, maximum]
+
+Q5: How many of the 14 risk factors reduce the life expectancy of <parameter-territory> by at least <parameter-number> years? [algorithm(s): linear search or binary search, count]
+
+
+Encode the expected answers to the questions below. For question with parameter(s), indicate explicitly the
+actual parameter value(s). 
+
+A1: 5.77 years (Metabolic risk factor)
+
+A2: Case 1: <parameter-territory> = Gambia
+		  2.13 years
+	
+    Case 2: <parameter-territory> = Samoa
+		  6.25 years
+
+    Case 3: <parameter-territory> = Australasia
+		  Invalid input. Name of the territory is not included in the dataset.
+
+A3: Saint Vincent and the Grenadines
+
+A4: Case 1: <parameter-number> = -34
+		  Invalid input. Limit of the ranked territories should be a nonnegative integer.
+		   	
+    Case 2: <parameter-territory> = 3
+		  Singapore		84.57		Metabolic	3.28	
+		  Japan			84.56		Metabolic	2.55
+		  Iceland 		83.89		Metabolic 	3.94
+
+    Case 3: <parameter-territory> = 5
+		  Singapore		84.57		Metabolic	3.28	
+		  Japan			84.56		Metabolic	2.55
+		  Iceland 		83.89		Metabolic 	3.94
+		  Switzerland		83.86		Metabolic	4.02
+	  	  Italy			83.03		Metabolic	4.39
+
+A5: Case 1: <parameter-territory> = Switzerland
+	    <parameter-number> = -1
+		   14 risk factors / Invalid input. Number of years should be a nonnegative integer.
+	
+    Case 2: <parameter-territory> = Pakistan
+	    <parameter-number> = 2
+		   5 risk factors
+
+    Case 3: <parameter-territory> = United_States_Virgin_Islands
+	    <parameter-number> = 4
+		  Invalid input. Name of the territory is not included in the dataset. 
+
+
+Do NOT forget to rename this text file with your own name(s) and submit it via Canvas!!!
+
