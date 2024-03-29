@@ -96,7 +96,7 @@ printDataSet(dataSetStruct territory[], int rowsOfData, FILE *fp_dest)
 {
 	for (int currentRow = 0; currentRow < rowsOfData; currentRow++)
 	{
-		fprintf(fp_dest, "\n\t%s \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf \t%lf\n", territory[currentRow].name, territory[currentRow].baseLE, territory[currentRow].airPollution, territory[currentRow].ambientPM, territory[currentRow].ozone, territory[currentRow].HAP, territory[currentRow].environ, territory[currentRow].occup, territory[currentRow].unsafeWash, territory[currentRow].metabolic, territory[currentRow].dietary, territory[currentRow].plasma, territory[currentRow].tobacco, territory[currentRow].smoking, territory[currentRow].secondhandSmoke, territory[currentRow].unsafeSex);
+		fprintf(fp_dest, "\n\t%s \t%.6lf \t%.6lf \t%.6lf \t%.6lf \t%.6lf \t%.6lf \t%.6lf \t%.6lf \t%.6lf \t%.6lf \t%.6lf \t%.6lf \t%.6lf \t%.6lf \t%.6lf\n", territory[currentRow].name, territory[currentRow].baseLE, territory[currentRow].airPollution, territory[currentRow].ambientPM, territory[currentRow].ozone, territory[currentRow].HAP, territory[currentRow].environ, territory[currentRow].occup, territory[currentRow].unsafeWash, territory[currentRow].metabolic, territory[currentRow].dietary, territory[currentRow].plasma, territory[currentRow].tobacco, territory[currentRow].smoking, territory[currentRow].secondhandSmoke, territory[currentRow].unsafeSex);
 	}
 }
 
@@ -586,7 +586,7 @@ main()
 	for(i = 0; i < 3; i++) {
 		fprintf(fp_dest, "\nTest case %d: ", (i + 1));
 		fprintf(fp_dest, "<parameter-territory> is %s\n", testTerrQ5[i]);
-		fprintf(fp_dest, "<parameter-number> is %lf\n", testValsQ5[i]);
+		fprintf(fp_dest, "<parameter-number> is %.6lf\n", testValsQ5[i]);
 		
 		ctrQ5 = Q5(territory, testTerrQ5[i], rowsOfData, testValsQ5[i]);
 		
@@ -600,6 +600,7 @@ main()
 			fprintf(fp_dest, "%d risk factors\n", ctrQ5);
 	}
 
-
+	fclose(fp_dest);
+	fclose(fp_source);
 	return 0;
 }
