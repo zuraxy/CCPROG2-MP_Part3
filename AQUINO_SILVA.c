@@ -507,10 +507,13 @@ main()
 	indexSetter(indexLabel, max);
 	
 	fprintf(fp_dest, "Q1: What is the highest average loss of life expectancy among all risk factors? Display the value and the name of the risk factor?\n");
-	fprintf(fp_dest, "A1: %.2lf years (%s risk factor)\n\n", highestAverage, indexLabel);
+	fprintf(fp_dest, "A1: %.6lf years (%s risk factor)\n\n", highestAverage, indexLabel);
 
 	/************************************************************************|Q-U-E-S-T-I-O-N|*************************************************************************
 	 *****************************************************************************|T-W-O|************************************************************************/
+	fclose(fp_dest);
+	fp_dest = fopen("OUTPUT_AQUINO_SILVA.txt", "a");
+	
 	string Q2ParameterTerritory[3] = {"Gambia", "Samoa", "Australasia"};
 	int index;
 	
@@ -522,7 +525,7 @@ main()
 		if (index == -1)
 			fprintf(fp_dest, "\t\tInvalid input. Name of the territory is not included in the dataset.\n\n");
 		else
-			fprintf(fp_dest, "\t\t%.2lf years\n\n",Q2(territory, rowsOfData, index));
+			fprintf(fp_dest, "\t\t%.6lf years\n\n",Q2(territory, rowsOfData, index));
 	}
 
 	/*************************************************************************|Q-U-E-S-T-I-O-N|*************************************************************************
@@ -562,7 +565,7 @@ main()
 			fprintf(fp_dest, "Invalid input. Please input a nonnegative integer.\n");
 		
 		else for(j = 0; j < testQ4[i]; j++) {
-			fprintf(fp_dest, "%20s %10lf %10s %10lf\n", terrList[j].name, terrList[j].baseLE, maxRisk[j], maxRiskVal[j]);
+			fprintf(fp_dest, "%20s %10.6lf %10.6s %10.6lf\n", terrList[j].name, terrList[j].baseLE, maxRisk[j], maxRiskVal[j]);
 		}
 	}
 	 
