@@ -6,7 +6,7 @@
 	LASTNAME1, FIRSTNAME1: AQUINO, Bon Windel E.                              SECTION1: S11A
 	LASTNAME2, FIRSTNAME2: SILVA, Paulo Grane Gabriel C.                      SECTION2: S12A
 
-	DATE SUBMITTED     : March XXXXX, 2024
+	DATE SUBMITTED     : March 30, 2024
 
 	Rename this file using your last names in alphabetical order, for example CRUZ_TAN.c
 
