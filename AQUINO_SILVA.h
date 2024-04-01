@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <string.h>
+#define MAX_ROWS 203
+
 typedef char string[50];
 
 struct data

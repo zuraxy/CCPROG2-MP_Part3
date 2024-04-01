@@ -6,7 +6,7 @@
 	LASTNAME1, FIRSTNAME1: AQUINO, Bon Windel E.                              SECTION1: S11A
 	LASTNAME2, FIRSTNAME2: SILVA, Paulo Grane Gabriel C.                      SECTION2: S12A
 
-	DATE SUBMITTED     : March 30, 2024
+	DATE SUBMITTED     : April 1, 2024
 
 	Rename this file using your last names in alphabetical order, for example CRUZ_TAN.c
 
@@ -21,10 +21,7 @@
 
 */
 
-#include <stdio.h>
-#include <string.h>
 #include "AQUINO_SILVA.h"
-#define MAX_ROWS 203
 /* Do NOT include other header files. */
 
 /*
